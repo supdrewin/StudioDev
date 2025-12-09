@@ -27,11 +27,17 @@ jobs:
       - name: Build .Net8
         run: msbuild /t:AssetStudio_GUI:publish /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:SelfContained=false /verbosity:minimal
 
+      - name: Build .Net9
+        run: msbuild /t:AssetStudio_GUI:publish /p:Configuration=Release /p:TargetFramework=net9.0-windows /p:SelfContained=false /verbosity:minimal
+
       - name: Build .Net7 CLI
         run: msbuild /t:AssetStudio_CLI:publish /p:Configuration=Release /p:TargetFramework=net7.0-windows /p:SelfContained=false /verbosity:minimal
 
       - name: Build .Net8 CLI
         run: msbuild /t:AssetStudio_CLI:publish /p:Configuration=Release /p:TargetFramework=net8.0-windows /p:SelfContained=false /verbosity:minimal
+
+      - name: Build .Net9 CLI
+        run: msbuild /t:AssetStudio_CLI:publish /p:Configuration=Release /p:TargetFramework=net9.0-windows /p:SelfContained=false /verbosity:minimal
 
       - name: Upload .Net7 Artifact
         uses: actions/upload-artifact@v4
@@ -44,5 +50,11 @@ jobs:
         with:
           name: net8.0-${{ github.sha }}-${{matrix.runs-on}}
           path: AssetStudio.GUI/bin/Release/net8.0-windows/publish
+
+      - name: Upload .Net9 Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: net9.0-${{ github.sha }}-${{matrix.runs-on}}
+          path: AssetStudio.GUI/bin/Release/net9.0-windows/publish
 
     
